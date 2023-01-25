@@ -1,0 +1,194 @@
+Make(delphi)
+ver(4.05 build 186)
+Add(SimpleForm,2953706,308,252)
+{
+ Width=330
+ Height=152
+ BorderStyle=1
+ Point(onShow)
+ link(onCreate,11043823:doEvent1,[(380,258)(380,244)])
+ link(onShow,7663606:doEvent1,[])
+}
+Add(ComboBox,13760228,622,189)
+{
+ Left=5
+ Top=10
+ Width=105
+ Height=21
+ Hint="Список доступных портов"
+ FileName="C:\port.txt"
+ AddType=1
+ Text=""C:\port.txt""
+ DataType=1
+ ReadOnly=0
+ IndexManager=""
+ Point(doHint)
+ Point(doEditText)
+ Point(EditText)
+}
+Add(EnumCOM,13029613,455,210)
+{
+ OutType=0
+ link(onEnumPorts,4585433:doEvent1,[(492,216)(492,209)])
+}
+Add(Hub,191970,427,231)
+{
+ InCount=2
+ OutCount=1
+ link(onEvent1,13029613:doEnumPorts,[(448,237)(448,216)])
+}
+Add(LED,13354828,630,301)
+{
+ Left=115
+ Top=15
+ Width=15
+ Height=15
+ Hint="Индикатор активности"
+ ColorOn=65280
+ ColorOff=255
+ ColorBlick=12632256
+ Point(doHint)
+}
+Add(Button,1286328,259,343)
+{
+ Left=5
+ Top=70
+ Width=105
+ Caption="Закрыть порт"
+ Point(doEnabled)
+ link(onClick,3512868:doEvent1,[])
+}
+Add(Button,4033053,385,455)
+{
+ Left=5
+ Top=95
+ Width=305
+ Caption="Надавить на RESET (УБЕДИСЬ, ЧТО ВСЁ СОХРАНЕНО!)"
+ Data=String(RST)
+ Flat=0
+ MakeExt(Data,,Data)
+ link(onClick,14146365:doEvent2,[(487,461)(487,398)])
+}
+Add(Button,2517821,322,182)
+{
+ Left=115
+ Top=40
+ Width=110
+ Caption="Обновить список"
+ Point(doEnabled)
+ link(onClick,10388657:doEvent1,[])
+}
+Add(Hub,7017095,392,301)
+{
+ OutCount=3
+ link(onEvent1,7230765:doEvent2,[])
+ link(onEvent2,16162483:doEvent2,[(418,314)(418,370)(296,370)(296,426)])
+ link(onEvent3,12403485:doWork3,[(458,321)])
+}
+Add(Hub,3512868,315,343)
+{
+ OutCount=3
+ link(onEvent1,1052329:doClose,[(423,349)(423,314)])
+ link(onEvent2,6681488:doStop,[(343,356)(343,503)])
+ link(onEvent3,13354828:doOff,[(479,363)(479,288)(595,288)(595,314)])
+}
+Add(Hub,10388657,392,182)
+{
+ link(onEvent1,13760228:doClear,[(458,188)(458,202)])
+ link(onEvent2,191970:doEvent2,[(416,195)(416,244)])
+}
+Add(TrayIcon,15618965,1176,252)
+{
+ Hint="ArduinoWD"
+ link(onClick,15618965:doShow,[(1220,258)(1220,246)(1164,246)(1164,258)])
+}
+Add(Hub,14146365,497,385)
+{
+ InCount=2
+ OutCount=1
+ link(onEvent1,1052329:doWrite,[(515,391)(515,328)])
+}
+Add(Button,13630512,301,301)
+{
+ Left=5
+ Top=40
+ Width=105
+ Caption="Открыть порт"
+ Data=Integer(1)
+ DefaultBtn=0
+ Point(doEnabled)
+ link(onClick,7017095:doEvent1,[])
+}
+Add(Hub,12858811,574,364)
+{
+ link(onEvent1,13354828:doOn,[(624,370)(624,321)])
+ link(onEvent2,16162483:doEvent1,[(603,377)(603,400)(296,400)(296,419)])
+}
+Add(Hub,16162483,301,413)
+{
+ InCount=2
+ OutCount=1
+ link(onEvent1,7881600:doEvent1,[(336,419)(336,482)])
+}
+Add(Timer,6681488,385,490)
+{
+ Interval=2000
+ Enable=1
+ Point(doInterval)
+ link(onTimer,7503611:doStop,[])
+}
+Add(If_else,6109585,525,490)
+{
+ Type=2
+ Op1=Integer(1)
+ Op2=Integer(0)
+ link(onTrue,9066001:doClear,[(569,496)(569,458)(422,458)(422,419)])
+}
+Add(TimeCounter,7503611,441,483)
+{
+ link(onStop,6109585:doCompare,[])
+}
+Add(Memory,9066001,427,406)
+{
+ Default=String(OK)
+ link(onData,14146365:doEvent1,[(478,412)(478,391)])
+}
+Add(Hub,11043823,385,238)
+{
+ OutCount=3
+ link(onEvent1,13760228:doLoad,[(511,244)(511,223)])
+ link(onEvent2,13760228:doEditText,[(511,251)(511,244)])
+ link(onEvent3,7881600:doEvent2,[(411,258)(411,374)(345,374)(345,489)])
+}
+Add(Hub,7230765,490,294)
+{
+ InCount=3
+ OutCount=1
+ link(onEvent1,1052329:doOpen,[(511,300)(511,307)])
+}
+Add(HubEx,12403485,454,252)
+{
+ Angle=3
+ link(onEvent,13760228:doSave,[(458,230)])
+}
+Add(Hub,7663606,357,259)
+{
+ link(onEvent1,15618965:doHide,[])
+ link(onEvent2,7230765:doEvent1,[(431,272)(431,300)])
+}
+Add(COM,1052329,518,301)
+{
+ link(onWrite,12858811:doEvent1,[(569,307)(569,370)])
+ link(Port,13760228:EditText,[(524,275)(642,275)])
+}
+Add(Hub,4585433,497,203)
+{
+ link(onEvent1,13760228:doAdd,[(555,209)(555,195)])
+ link(onEvent2,7230765:doEvent3,[(523,216)(523,265)(478,265)(478,314)])
+}
+Add(Hub,7881600,357,476)
+{
+ InCount=2
+ OutCount=1
+ link(onEvent1,6681488:doTimer,[(378,482)(378,496)])
+}
